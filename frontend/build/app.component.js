@@ -1,4 +1,4 @@
-System.register(['angular2/core', './components/home.component', './services/user.service', './services/photo.service', './data/mock-users', './data/mock-photos', 'angular2/router', './components/image-detail.component', './components/nav-bar.component'], function(exports_1, context_1) {
+System.register(['angular2/core', './components/home.component', './services/user.service', './services/photo.service', './data/mock-users', './data/mock-photos', 'angular2/router', './components/image-detail.component', './components/nav-bar.component', './components/login.component', './services/login.service', 'angular2/http'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './components/home.component', './services/use
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, home_component_1, user_service_1, photo_service_1, mock_users_1, mock_photos_1, router_1, router_2, image_detail_component_1, nav_bar_component_1;
+    var core_1, home_component_1, user_service_1, photo_service_1, mock_users_1, mock_photos_1, router_1, router_2, image_detail_component_1, nav_bar_component_1, login_component_1, login_service_1, http_1;
     var AppComponent;
     return {
         setters:[
@@ -41,6 +41,15 @@ System.register(['angular2/core', './components/home.component', './services/use
             },
             function (nav_bar_component_1_1) {
                 nav_bar_component_1 = nav_bar_component_1_1;
+            },
+            function (login_component_1_1) {
+                login_component_1 = login_component_1_1;
+            },
+            function (login_service_1_1) {
+                login_service_1 = login_service_1_1;
+            },
+            function (http_1_1) {
+                http_1 = http_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -49,13 +58,14 @@ System.register(['angular2/core', './components/home.component', './services/use
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        providers: [user_service_1.UserService, photo_service_1.PhotoService, mock_users_1.MockUsers, mock_photos_1.MockPhotos, router_2.ROUTER_PROVIDERS],
-                        directives: [home_component_1.HomeComponent, router_1.ROUTER_DIRECTIVES, nav_bar_component_1.NavBar],
+                        providers: [user_service_1.UserService, photo_service_1.PhotoService, mock_users_1.MockUsers, mock_photos_1.MockPhotos, router_2.ROUTER_PROVIDERS, http_1.HTTP_PROVIDERS, login_service_1.LoginService],
+                        directives: [home_component_1.HomeComponent, router_1.ROUTER_DIRECTIVES, nav_bar_component_1.NavBar, login_component_1.Login],
                         templateUrl: 'app/app.component.html'
                     }),
                     router_1.RouteConfig([
-                        { path: '/home', name: 'Home', component: home_component_1.HomeComponent, useAsDefault: true },
-                        { path: '/image-detail/:id', name: 'ImageDetail', component: image_detail_component_1.ImageDetail }
+                        { path: '/home', name: 'Home', component: home_component_1.HomeComponent },
+                        { path: '/image-detail/:id', name: 'ImageDetail', component: image_detail_component_1.ImageDetail },
+                        { path: '/login', name: 'Login', component: login_component_1.Login, useAsDefault: true }
                     ]), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);

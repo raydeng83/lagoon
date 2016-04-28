@@ -1,0 +1,21 @@
+<div class="container">
+  <form (ngSubmit)="onSubmit()" class="ui form">
+    <div class="field">
+      <label for="username">Username</label>
+      <input type="text" required [(ngModel)]="model.username" ngControl="username" placeholder="Username" required><br>
+    </div>
+
+    <div class="field">
+      <label for="password">Password</label>
+      <input type="password" required [(ngModel)]="model.password" ngControl="password" required>
+    </div>
+
+    <button type="submit" class="ui button">Submit</button>
+  </form>
+
+  <p>Here is the token: {{token}}</p>
+
+  <ul>
+    <li *ngFor = "#user of users">{{user.username}}</li>
+  </ul>
+</div>

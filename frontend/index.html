@@ -15,7 +15,7 @@
     <script src="node_modules/systemjs/dist/system.src.js"></script>
     <script src="node_modules/rxjs/bundles/Rx.js"></script>
     <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
-
+    <script src="node_modules/angular2/bundles/http.dev.js"></script>
     <script src="node_modules/angular2/bundles/router.dev.js"></script>
 
     <!-- Add jquery -->
@@ -30,13 +30,13 @@
     <script>
       System.config({
         packages: {
-          app: {
+          build: {
             format: 'register',
             defaultExtension: 'js'
           }
         }
       });
-      System.import('app/main')
+      System.import('build/main')
             .then(null, console.error.bind(console));
     </script>
   </head>
