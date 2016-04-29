@@ -1,4 +1,4 @@
-System.register(['angular2/core', '../data/mock-photos'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/http'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,33 +10,35 @@ System.register(['angular2/core', '../data/mock-photos'], function(exports_1, co
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, mock_photos_1;
+    var core_1, http_1;
     var PhotoService;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (mock_photos_1_1) {
-                mock_photos_1 = mock_photos_1_1;
+            function (http_1_1) {
+                http_1 = http_1_1;
             }],
         execute: function() {
             PhotoService = (function () {
-                function PhotoService(_mockPhotos) {
-                    this.photos = _mockPhotos.getPhotos();
+                function PhotoService(http) {
+                    this.http = http;
                 }
                 PhotoService.prototype.getPhotos = function () {
-                    return this.photos;
-                };
-                PhotoService.prototype.getPhotosPromise = function () {
-                    return Promise.resolve(this.photos);
+                    var url = "http://localhost:8080/photo/allPhotos";
+                    return this.http.get(url);
                 };
                 PhotoService.prototype.getPhotoById = function (id) {
-                    return this.photos.filter(function (photo) { return photo.photoId === id; })[0];
+                };
+                PhotoService.prototype.getPhotosByUser = function (user) {
+                    var tokenUrl1 = "http://localhost:8080/rest/photo/user";
+                    var headers1 = new http_1.Headers({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem("token") });
+                    return this.http.post(tokenUrl1, JSON.stringify(user), { headers: headers1 });
                 };
                 PhotoService = __decorate([
                     core_1.Injectable(), 
-                    __metadata('design:paramtypes', [mock_photos_1.MockPhotos])
+                    __metadata('design:paramtypes', [http_1.Http])
                 ], PhotoService);
                 return PhotoService;
             }());

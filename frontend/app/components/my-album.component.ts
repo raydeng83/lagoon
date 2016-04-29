@@ -1,21 +1,35 @@
 import {Component, Input} from 'angular2/core';
+import {PhotoService} from '../services/photo.service';
 import {UserService} from '../services/user.service';
 import {User} from '../models/user';
 import {Photo} from '../models/photo';
 import {Router} from 'angular2/router';
-import {GlobalService} from '../services/global.service';
+import {ROUTER_DIRECTIVES} from 'angular2/router';
+
 
 @Component({
   selector: 'my-album',
+  directives: [ROUTER_DIRECTIVES],
   templateUrl: 'app/components/my-album.component.html'
 })
 export class MyAlbum {
 
-  private user: User;
+  private photos: Photo[];
+  private user;
   private selectedPhoto: Photo;
 
-  constructor (_userService: UserService, private _router: Router, globalService: GlobalService) {
-    this.user=_userService.getUserByName(localStorage.getItem("currentUserName"));
+  constructor (private photoService: PhotoService, private _router: Router, private userService: UserService) {
+    this.userService.getUserByName(localStorage.getItem("currentUserName")).subscribe(
+      user => {
+        this.user = JSON.parse(JSON.stringify(user))._body;
+        console.log(this.user);
+        // this.photoService.getPhotosByUser(this.user).subscribe(
+        //   photos => this.photos = JSON.parse(JSON.parse(JSON.stringify(user))._body),
+        //   error => console.log(error)
+        // );
+      },
+      error => console.log(error)
+    );
   }
 
   onSelect(photo:Photo) {

@@ -28,4 +28,10 @@ public class UserResource {
     }
 
 
+    @RequestMapping(value = "/user/userName", method = RequestMethod.POST)
+    public User findByUserName(@RequestBody String userName) {
+        System.out.println(userName);
+        System.out.println(userService.findByUserName(userName));
+        return userService.findByUserName(userName);
+    }
 }

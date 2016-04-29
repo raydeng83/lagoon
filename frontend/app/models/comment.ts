@@ -1,8 +1,9 @@
+import {Photo} from './photo';
+import {User} from './user';
+
 export class Comment {
-  userId: string;
+  commentId: number;
+  photo: Photo;
+  user: User;
   content: string;
-
-  constructor (userId: string, content: string) {
-
-  }
 }

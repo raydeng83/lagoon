@@ -1,4 +1,4 @@
-System.register(['angular2/core', '../services/user.service', 'angular2/router', '../services/global.service'], function(exports_1, context_1) {
+System.register(['angular2/core', '../services/photo.service', '../services/user.service', 'angular2/router'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,27 +10,38 @@ System.register(['angular2/core', '../services/user.service', 'angular2/router',
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, user_service_1, router_1, global_service_1;
+    var core_1, photo_service_1, user_service_1, router_1, router_2;
     var MyAlbum;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
+            function (photo_service_1_1) {
+                photo_service_1 = photo_service_1_1;
+            },
             function (user_service_1_1) {
                 user_service_1 = user_service_1_1;
             },
             function (router_1_1) {
                 router_1 = router_1_1;
-            },
-            function (global_service_1_1) {
-                global_service_1 = global_service_1_1;
+                router_2 = router_1_1;
             }],
         execute: function() {
             MyAlbum = (function () {
-                function MyAlbum(_userService, _router, globalService) {
+                function MyAlbum(photoService, _router, userService) {
+                    var _this = this;
+                    this.photoService = photoService;
                     this._router = _router;
-                    this.user = _userService.getUserByName(localStorage.getItem("currentUserName"));
+                    this.userService = userService;
+                    this.userService.getUserByName(localStorage.getItem("currentUserName")).subscribe(function (user) {
+                        _this.user = JSON.parse(JSON.stringify(user))._body;
+                        console.log(_this.user);
+                        // this.photoService.getPhotosByUser(this.user).subscribe(
+                        //   photos => this.photos = JSON.parse(JSON.parse(JSON.stringify(user))._body),
+                        //   error => console.log(error)
+                        // );
+                    }, function (error) { return console.log(error); });
                 }
                 MyAlbum.prototype.onSelect = function (photo) {
                     this.selectedPhoto = photo;
@@ -39,9 +50,10 @@ System.register(['angular2/core', '../services/user.service', 'angular2/router',
                 MyAlbum = __decorate([
                     core_1.Component({
                         selector: 'my-album',
+                        directives: [router_2.ROUTER_DIRECTIVES],
                         templateUrl: 'app/components/my-album.component.html'
                     }), 
-                    __metadata('design:paramtypes', [user_service_1.UserService, router_1.Router, global_service_1.GlobalService])
+                    __metadata('design:paramtypes', [photo_service_1.PhotoService, router_1.Router, user_service_1.UserService])
                 ], MyAlbum);
                 return MyAlbum;
             }());

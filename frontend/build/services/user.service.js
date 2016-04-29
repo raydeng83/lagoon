@@ -1,4 +1,4 @@
-System.register(['../data/mock-users', 'angular2/core'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/http'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,33 +10,33 @@ System.register(['../data/mock-users', 'angular2/core'], function(exports_1, con
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var mock_users_1, core_1;
+    var core_1, http_1;
     var UserService;
     return {
         setters:[
-            function (mock_users_1_1) {
-                mock_users_1 = mock_users_1_1;
-            },
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (http_1_1) {
+                http_1 = http_1_1;
             }],
         execute: function() {
             UserService = (function () {
-                function UserService(_mockUsers) {
-                    this.users = _mockUsers.getUsers();
+                function UserService(http) {
+                    this.http = http;
                 }
                 UserService.prototype.getUsers = function () {
-                    return Promise.resolve(this.users);
                 };
                 UserService.prototype.getUserById = function (id) {
-                    return this.users.filter(function (user) { return user.userId === id; })[0];
                 };
                 UserService.prototype.getUserByName = function (username) {
-                    return this.users.filter(function (user) { return user.userName === username; })[0];
+                    var tokenUrl1 = "http://localhost:8080/rest/user/userName";
+                    var headers1 = new http_1.Headers({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem("token") });
+                    return this.http.post(tokenUrl1, JSON.stringify(username), { headers: headers1 });
                 };
                 UserService = __decorate([
                     core_1.Injectable(), 
-                    __metadata('design:paramtypes', [mock_users_1.MockUsers])
+                    __metadata('design:paramtypes', [http_1.Http])
                 ], UserService);
                 return UserService;
             }());

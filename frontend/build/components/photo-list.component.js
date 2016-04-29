@@ -1,4 +1,4 @@
-System.register(['angular2/core', '../services/user.service', 'angular2/router'], function(exports_1, context_1) {
+System.register(['angular2/core', '../services/photo.service', 'angular2/router'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,25 +10,26 @@ System.register(['angular2/core', '../services/user.service', 'angular2/router']
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, user_service_1, router_1;
+    var core_1, photo_service_1, router_1;
     var PhotoList;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (user_service_1_1) {
-                user_service_1 = user_service_1_1;
+            function (photo_service_1_1) {
+                photo_service_1 = photo_service_1_1;
             },
             function (router_1_1) {
                 router_1 = router_1_1;
             }],
         execute: function() {
             PhotoList = (function () {
-                function PhotoList(_userService, _router) {
+                function PhotoList(photoService, _router) {
                     var _this = this;
+                    this.photoService = photoService;
                     this._router = _router;
-                    _userService.getUsers().then(function (users) { return _this.users = users; });
+                    this.photoService.getPhotos().subscribe(function (data) { return _this.photos = JSON.parse(JSON.parse(JSON.stringify(data))._body); }, function (error) { return console.log(error); });
                 }
                 PhotoList.prototype.onSelect = function (photo) {
                     this.selectedPhoto = photo;
@@ -39,7 +40,7 @@ System.register(['angular2/core', '../services/user.service', 'angular2/router']
                         selector: 'photo-list',
                         templateUrl: 'app/components/photo-list.component.html'
                     }), 
-                    __metadata('design:paramtypes', [user_service_1.UserService, router_1.Router])
+                    __metadata('design:paramtypes', [photo_service_1.PhotoService, router_1.Router])
                 ], PhotoList);
                 return PhotoList;
             }());

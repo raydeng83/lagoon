@@ -28,7 +28,7 @@ public class User {
 //    @UpdateTimestamp
 //    private Date updated;
 
-    @OneToMany(mappedBy = "createdByUser", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Photo> photoList;
 
     @ManyToMany

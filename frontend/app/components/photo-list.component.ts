@@ -1,19 +1,24 @@
 import {Component} from 'angular2/core';
-import {UserService} from '../services/user.service';
+import {PhotoService} from '../services/photo.service';
 import {User} from '../models/user';
 import {Photo} from '../models/photo';
 import {Router} from 'angular2/router';
+import {Observable}     from 'rxjs/Observable';
+
 
 @Component({
   selector: 'photo-list',
   templateUrl: 'app/components/photo-list.component.html'
 })
 export class PhotoList {
-  users: User[];
+  photos: Photo[];
   selectedPhoto: Photo;
 
-  constructor (_userService: UserService, private _router: Router) {
-    _userService.getUsers().then(users => this.users=users);
+  constructor (private photoService: PhotoService, private _router: Router) {
+    this.photoService.getPhotos().subscribe(
+      data => this.photos = JSON.parse(JSON.parse(JSON.stringify(data))._body),
+      error => console.log(error)
+    );
   }
 
   onSelect(photo:Photo) {

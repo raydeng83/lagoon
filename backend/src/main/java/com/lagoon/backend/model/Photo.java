@@ -1,10 +1,6 @@
 package com.lagoon.backend.model;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,10 +22,10 @@ public class Photo {
 //    private Date updated;
 
     @ManyToOne
-    private User createdByUser;
+    private User user;
 
     @ManyToMany(mappedBy = "likedPhotoList", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<User> likedByUserList;
+    private List<User> likedUserList;
 
     private int likes;
 
@@ -92,20 +88,20 @@ public class Photo {
         this.commentList = commentList;
     }
 
-    public User getCreatedByUser() {
-        return createdByUser;
+    public User getUser() {
+        return user;
     }
 
-    public void setCreatedByUser(User createdByUser) {
-        this.createdByUser = createdByUser;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public List<User> getLikedByUserList() {
-        return likedByUserList;
+    public List<User> getLikedUserList() {
+        return likedUserList;
     }
 
-    public void setLikedByUserList(List<User> likedByUserList) {
-        this.likedByUserList = likedByUserList;
+    public void setLikedUserList(List<User> likedUserList) {
+        this.likedUserList = likedUserList;
     }
 
     public String getPhotoName() {

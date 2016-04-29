@@ -6,7 +6,7 @@ System.register([], function(exports_1, context_1) {
         setters:[],
         execute: function() {
             Comment = (function () {
-                function Comment(userId, content) {
+                function Comment() {
                 }
                 return Comment;
             }());

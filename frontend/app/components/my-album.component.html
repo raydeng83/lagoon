@@ -1,8 +1,8 @@
-<div class="container">
+<!-- <div class="container">
   <div class='photo-list'>
     <div clas="ui grid">
        <div class="ui horizontal segments" >
-         <span *ngFor="#photo of user.photos" >
+         <span *ngFor="#photo of photos" >
            <div class="ui segment">
              <img src='{{photo.link}}' class='ui medium image' (click)="onSelect(photo)" style="cursor: pointer">
              <div class="ui grid">
@@ -18,6 +18,6 @@
         </div>
       </div>
 
-      <button class="ui button">Add Photo</button>
+      <a class="ui button" [routerLink]="['AddPhoto']" >Add Photo</a>
   </div>
-</div>
+</div> -->

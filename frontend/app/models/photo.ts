@@ -1,12 +1,14 @@
 import {Comment} from './comment';
+import {User} from './User';
 
 export class Photo {
-  public photoId: string;
-  public userId: string;
+  public photoId: number;
+  public photoName: string;
   public title: string;
   public description: string;
-  public time: string;
-  public link: string;
+  public user: User;
+  
+  public likedByUserList: User[];
   public likes: number;
-  public comments: Comment[];
+  public commentList: Comment[];
 }
