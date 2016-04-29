@@ -1,4 +1,4 @@
-System.register(['angular2/core', '../services/login.service', '../services/global.service'], function(exports_1, context_1) {
+System.register(['angular2/core', '../services/login.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', '../services/login.service', '../services/glob
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, login_service_1, global_service_1;
+    var core_1, login_service_1;
     var Login;
     return {
         setters:[
@@ -19,15 +19,11 @@ System.register(['angular2/core', '../services/login.service', '../services/glob
             },
             function (login_service_1_1) {
                 login_service_1 = login_service_1_1;
-            },
-            function (global_service_1_1) {
-                global_service_1 = global_service_1_1;
             }],
         execute: function() {
             Login = (function () {
-                function Login(loginService, globalService) {
+                function Login(loginService) {
                     this.loginService = loginService;
-                    this.globalService = globalService;
                     this.model = { 'username': '', 'password': '' };
                 }
                 Login.prototype.onSubmit = function () {
@@ -47,7 +43,7 @@ System.register(['angular2/core', '../services/login.service', '../services/glob
                         selector: 'login',
                         templateUrl: 'app/components/login.component.html'
                     }), 
-                    __metadata('design:paramtypes', [login_service_1.LoginService, global_service_1.GlobalService])
+                    __metadata('design:paramtypes', [login_service_1.LoginService])
                 ], Login);
                 return Login;
             }());

@@ -14,10 +14,11 @@ import { HTTP_PROVIDERS } from 'angular2/http';
 import {MyAlbum} from './components/my-album.component';
 import {GlobalService} from './services/global.service';
 import {Register} from './components/register.component'
+import {RegisterService} from './services/register.service';
 
 @Component({
     selector: 'my-app',
-    providers:[UserService, PhotoService, MockUsers, MockPhotos, ROUTER_PROVIDERS, HTTP_PROVIDERS, LoginService, GlobalService],
+    providers:[UserService, PhotoService, MockUsers, MockPhotos, ROUTER_PROVIDERS, HTTP_PROVIDERS, LoginService, GlobalService, RegisterService],
     directives: [HomeComponent, ROUTER_DIRECTIVES, NavBar, Login, MyAlbum, Register],
     templateUrl: 'app/app.component.html'
 })

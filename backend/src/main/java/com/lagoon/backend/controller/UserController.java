@@ -48,4 +48,9 @@ public class UserController {
         return Jwts.builder().setSubject(userName).claim("roles", "user").setIssuedAt(new Date())
                 .signWith(SignatureAlgorithm.HS256, "secretkey").compact();
     }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public User registerUser(@RequestBody User user) {
+        return userService.save(user);
+    }
 }

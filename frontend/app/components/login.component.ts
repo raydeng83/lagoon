@@ -1,7 +1,6 @@
 import {Component} from 'angular2/core';
 import {Observable}  from 'rxjs/Observable';
 import {LoginService} from '../services/login.service';
-import {GlobalService} from '../services/global.service';
 
 @Component({
   selector: 'login',
@@ -12,7 +11,7 @@ export class Login {
   private currentUserName;
 
 
-  constructor (private loginService: LoginService, private globalService: GlobalService){
+  constructor (private loginService: LoginService){
   }
 
   onSubmit() {

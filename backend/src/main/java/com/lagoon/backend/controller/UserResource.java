@@ -3,10 +3,13 @@ package com.lagoon.backend.controller;
 import com.lagoon.backend.model.User;
 import com.lagoon.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Le on 4/27/2016.
@@ -23,4 +26,6 @@ public class UserResource {
     public List<User> findAllUsers() {
         return userService.findAllUsers();
     }
+
+
 }
