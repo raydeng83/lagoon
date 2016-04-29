@@ -13,18 +13,20 @@ import {LoginService} from './services/login.service';
 import { HTTP_PROVIDERS } from 'angular2/http';
 import {MyAlbum} from './components/my-album.component';
 import {GlobalService} from './services/global.service';
+import {Register} from './components/register.component'
 
 @Component({
     selector: 'my-app',
     providers:[UserService, PhotoService, MockUsers, MockPhotos, ROUTER_PROVIDERS, HTTP_PROVIDERS, LoginService, GlobalService],
-    directives: [HomeComponent, ROUTER_DIRECTIVES, NavBar, Login, MyAlbum],
+    directives: [HomeComponent, ROUTER_DIRECTIVES, NavBar, Login, MyAlbum, Register],
     templateUrl: 'app/app.component.html'
 })
 @RouteConfig([
   {path: '/home', name: 'Home', component: HomeComponent, useAsDefault:true},
   {path: '/image-detail/:id', name: 'ImageDetail', component: ImageDetail},
   {path: '/login', name: 'Login', component:Login},
-  {path: '/my-album', name: 'MyAlbum', component:MyAlbum}
+  {path: '/my-album', name: 'MyAlbum', component:MyAlbum},
+  {path: '/register', name: "Register", component: Register}
 ])
 export class AppComponent {
 }
