@@ -4,6 +4,8 @@ import {Observable}     from 'rxjs/Observable';
 
 @Injectable()
 export class LoginService {
+  token: string;
+
   constructor (private http: Http) {}
 
   sendCredential(model) {
@@ -21,6 +23,18 @@ export class LoginService {
     return this.http.get(tokenUrl2, {headers: getHeaders})
   }
 
-  
+  logout() {
+    localStorage.setItem("token","");
+    localStorage.setItem("currentUserName", '');
+    alert("You just logged out.");
+  }
+
+  checkLogin() {
+    if (localStorage.getItem("currentUserName")!='' && localStorage.getItem("token")!='') {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
 }

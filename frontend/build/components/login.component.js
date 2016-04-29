@@ -29,16 +29,16 @@ System.register(['angular2/core', '../services/login.service', '../services/glob
                     this.loginService = loginService;
                     this.globalService = globalService;
                     this.model = { 'username': '', 'password': '' };
-                    this.login = false;
                 }
                 Login.prototype.onSubmit = function () {
                     var _this = this;
                     this.loginService.sendCredential(this.model).subscribe(function (data) {
-                        _this.token = JSON.parse(JSON.stringify(data))._body;
-                        _this.loginService.sendToken(_this.token).subscribe(function (data) {
-                            _this.login = true;
+                        localStorage.setItem("token", JSON.parse(JSON.stringify(data))._body);
+                        _this.loginService.sendToken(localStorage.getItem("token")).subscribe(function (data) {
                             _this.currentUserName = _this.model.username;
                             localStorage.setItem("currentUserName", _this.model.username);
+                            _this.model.username = '';
+                            _this.model.password = '';
                         }, function (error) { return console.log(error); });
                     }, function (error) { return console.log(error); });
                 };

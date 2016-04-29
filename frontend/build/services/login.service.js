@@ -36,6 +36,19 @@ System.register(["angular2/core", 'angular2/http'], function(exports_1, context_
                     var getHeaders = new http_1.Headers({ 'Authorization': 'Bearer ' + token });
                     return this.http.get(tokenUrl2, { headers: getHeaders });
                 };
+                LoginService.prototype.logout = function () {
+                    localStorage.setItem("token", "");
+                    localStorage.setItem("currentUserName", '');
+                    alert("You just logged out.");
+                };
+                LoginService.prototype.checkLogin = function () {
+                    if (localStorage.getItem("currentUserName") != '' && localStorage.getItem("token") != '') {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                };
                 LoginService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

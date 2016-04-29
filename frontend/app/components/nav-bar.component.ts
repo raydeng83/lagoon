@@ -1,24 +1,24 @@
 import {Component} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
-import {GlobalService} from '../services/global.service';
+import {LoginService} from '../services/login.service';
 
 @Component({
   selector: 'nav-bar',
   directives: [ROUTER_DIRECTIVES],
+  providers: [LoginService],
   templateUrl:'app/components/nav-bar.component.html'
 })
 export class NavBar{
 
-  login:string = "Login";
+  myLocalStorage;
 
-  constructor (private globalService: GlobalService) {
+  constructor (private loginService:LoginService) {
+    this.myLocalStorage=localStorage;
   }
 
-  loginToggle() {
-    if (localStorage.getItem("currentUserName")=='') {
-      this.login="Login";
-    } else {
-      this.login="Logout";
+  onClick() {
+    if (this.loginService.checkLogin()) {
+      this.loginService.logout();
     }
   }
 

@@ -9,8 +9,6 @@ import {GlobalService} from '../services/global.service';
 })
 export class Login {
   private model = {'username':'', 'password':''};
-  private token;
-  private login=false;
   private currentUserName;
 
 
@@ -20,17 +18,21 @@ export class Login {
   onSubmit() {
     this.loginService.sendCredential(this.model).subscribe(
       data => {
-                this.token = JSON.parse(JSON.stringify(data))._body;
-                this.loginService.sendToken(this.token).subscribe(
+                localStorage.setItem("token", JSON.parse(JSON.stringify(data))._body);
+                this.loginService.sendToken(localStorage.getItem("token")).subscribe(
                   data => {
-                            this.login=true;
                             this.currentUserName=this.model.username;
                             localStorage.setItem("currentUserName", this.model.username);
+                            this.model.username='';
+                            this.model.password='';
                           },
                   error => console.log(error)
                 );
               },
       error => console.log(error)
     );
+
   }
+
+
 }
