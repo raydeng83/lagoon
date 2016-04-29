@@ -1,4 +1,4 @@
-System.register(['angular2/core', '../services/login.service'], function(exports_1, context_1) {
+System.register(['angular2/core', '../services/login.service', '../services/global.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', '../services/login.service'], function(exports
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, login_service_1;
+    var core_1, login_service_1, global_service_1;
     var Login;
     return {
         setters:[
@@ -19,19 +19,27 @@ System.register(['angular2/core', '../services/login.service'], function(exports
             },
             function (login_service_1_1) {
                 login_service_1 = login_service_1_1;
+            },
+            function (global_service_1_1) {
+                global_service_1 = global_service_1_1;
             }],
         execute: function() {
             Login = (function () {
-                function Login(loginService) {
+                function Login(loginService, globalService) {
                     this.loginService = loginService;
+                    this.globalService = globalService;
                     this.model = { 'username': '', 'password': '' };
-                    this.users = [];
+                    this.login = false;
                 }
                 Login.prototype.onSubmit = function () {
                     var _this = this;
                     this.loginService.sendCredential(this.model).subscribe(function (data) {
                         _this.token = JSON.parse(JSON.stringify(data))._body;
-                        _this.loginService.sendToken(_this.token).subscribe(function (data) { return _this.users = JSON.parse(JSON.parse(JSON.stringify(data))._body); }, function (error) { return console.log(error); });
+                        _this.loginService.sendToken(_this.token).subscribe(function (data) {
+                            _this.login = true;
+                            _this.currentUserName = _this.model.username;
+                            localStorage.setItem("currentUserName", _this.model.username);
+                        }, function (error) { return console.log(error); });
                     }, function (error) { return console.log(error); });
                 };
                 Login = __decorate([
@@ -39,7 +47,7 @@ System.register(['angular2/core', '../services/login.service'], function(exports
                         selector: 'login',
                         templateUrl: 'app/components/login.component.html'
                     }), 
-                    __metadata('design:paramtypes', [login_service_1.LoginService])
+                    __metadata('design:paramtypes', [login_service_1.LoginService, global_service_1.GlobalService])
                 ], Login);
                 return Login;
             }());

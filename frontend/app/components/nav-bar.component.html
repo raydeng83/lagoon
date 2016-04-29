@@ -8,4 +8,10 @@
   <a class="item" [routerLink]="['Home']">
     Home
   </a>
+  <a class="item" [routerLink]="['MyAlbum']">
+    My Album
+  </a>
+  <a class="item" [routerLink]="['Login']" (click)="loginToggle()">
+    {{login}}
+  </a>
 </div>

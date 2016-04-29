@@ -17,4 +17,8 @@ export class UserService {
   getUserById(id: string) {
     return this.users.filter(user => user.userId === id)[0];
   }
+
+  getUserByName(username: string) {
+    return this.users.filter(user => user.userName===username)[0];
+  }
 }

@@ -1,5 +1,5 @@
 <div class="container">
-  <form (ngSubmit)="onSubmit()" class="ui form">
+  <form (ngSubmit)="onSubmit()" class="ui form" [hidden]="login">
     <div class="field">
       <label for="username">Username</label>
       <input type="text" required [(ngModel)]="model.username" ngControl="username" placeholder="Username" required><br>
@@ -13,9 +13,9 @@
     <button type="submit" class="ui button">Submit</button>
   </form>
 
-  <p>Here is the token: {{token}}</p>
+  <div [hidden]="!login">
+    <h3>Logged In Successfully! </h3>
+    <h2>Welcome back, {{currentUserName}}!</h2>
+  </div>
 
-  <ul>
-    <li *ngFor = "#user of users">{{user.userName}}</li>
-  </ul>
 </div>

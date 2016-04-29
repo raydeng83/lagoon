@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', '../services/global.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1;
+    var core_1, router_1, global_service_1;
     var NavBar;
     return {
         setters:[
@@ -19,18 +19,31 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
             },
             function (router_1_1) {
                 router_1 = router_1_1;
+            },
+            function (global_service_1_1) {
+                global_service_1 = global_service_1_1;
             }],
         execute: function() {
             NavBar = (function () {
-                function NavBar() {
+                function NavBar(globalService) {
+                    this.globalService = globalService;
+                    this.login = "Login";
                 }
+                NavBar.prototype.loginToggle = function () {
+                    if (localStorage.getItem("currentUserName") == '') {
+                        this.login = "Login";
+                    }
+                    else {
+                        this.login = "Logout";
+                    }
+                };
                 NavBar = __decorate([
                     core_1.Component({
                         selector: 'nav-bar',
                         directives: [router_1.ROUTER_DIRECTIVES],
                         templateUrl: 'app/components/nav-bar.component.html'
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [global_service_1.GlobalService])
                 ], NavBar);
                 return NavBar;
             }());
