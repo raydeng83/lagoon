@@ -7,7 +7,7 @@
 
     <div class="field">
       <label for="password">Password</label>
-      <input type="password" required [(ngModel)]="model.password" ngControl="password" required>
+      <input type="password" required [(ngModel)]="model.password" ngControl="password" placeholder="password" required>
     </div>
 
     <button type="submit" class="ui button">Submit</button>
@@ -16,6 +16,6 @@
   <p>Here is the token: {{token}}</p>
 
   <ul>
-    <li *ngFor = "#user of users">{{user.username}}</li>
+    <li *ngFor = "#user of users">{{user.userName}}</li>
   </ul>
 </div>
