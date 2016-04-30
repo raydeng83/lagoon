@@ -34,4 +34,9 @@ public class UserResource {
         System.out.println(userService.findByUserName(userName));
         return userService.findByUserName(userName);
     }
+
+    @RequestMapping(value = "/user/update", method = RequestMethod.POST)
+    public User updateUser(@RequestBody User user) {
+        return userService.save(user);
+    }
 }

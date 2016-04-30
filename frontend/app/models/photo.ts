@@ -11,4 +11,5 @@ export class Photo {
   public likedByUserList: User[];
   public likes: number;
   public commentList: Comment[];
+  public created: Date;
 }

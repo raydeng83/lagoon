@@ -18,7 +18,7 @@ export class MyAlbum {
   private user;
   private selectedPhoto: Photo;
 
-  constructor (private photoService: PhotoService, private _router: Router, private userService: UserService) {
+  constructor (private photoService: PhotoService, private router: Router, private userService: UserService) {
     this.userService.getUserByName(localStorage.getItem("currentUserName")).subscribe(
       user => {
         this.user = JSON.parse(JSON.parse(JSON.stringify(user))._body);
@@ -35,6 +35,6 @@ export class MyAlbum {
 
   onSelect(photo:Photo) {
     this.selectedPhoto = photo;
-    this._router.navigate(['ImageDetail', {id: this.selectedPhoto.photoId}]);
+    this.router.navigate(['ImageDetail', {id: this.selectedPhoto.photoId}]);
   }
 }

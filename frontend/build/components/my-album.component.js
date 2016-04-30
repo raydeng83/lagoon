@@ -29,10 +29,10 @@ System.register(['angular2/core', '../services/photo.service', '../services/user
             }],
         execute: function() {
             MyAlbum = (function () {
-                function MyAlbum(photoService, _router, userService) {
+                function MyAlbum(photoService, router, userService) {
                     var _this = this;
                     this.photoService = photoService;
-                    this._router = _router;
+                    this.router = router;
                     this.userService = userService;
                     this.userService.getUserByName(localStorage.getItem("currentUserName")).subscribe(function (user) {
                         _this.user = JSON.parse(JSON.parse(JSON.stringify(user))._body);
@@ -44,7 +44,7 @@ System.register(['angular2/core', '../services/photo.service', '../services/user
                 }
                 MyAlbum.prototype.onSelect = function (photo) {
                     this.selectedPhoto = photo;
-                    this._router.navigate(['ImageDetail', { id: this.selectedPhoto.photoId }]);
+                    this.router.navigate(['ImageDetail', { id: this.selectedPhoto.photoId }]);
                 };
                 MyAlbum = __decorate([
                     core_1.Component({

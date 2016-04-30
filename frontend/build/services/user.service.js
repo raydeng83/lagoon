@@ -34,6 +34,11 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     var headers1 = new http_1.Headers({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem("token") });
                     return this.http.post(tokenUrl1, username, { headers: headers1 });
                 };
+                UserService.prototype.updateUser = function (user) {
+                    var tokenUrl1 = "http://localhost:8080/rest/user/update";
+                    var headers1 = new http_1.Headers({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem("token") });
+                    return this.http.post(tokenUrl1, JSON.stringify(user), { headers: headers1 });
+                };
                 UserService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

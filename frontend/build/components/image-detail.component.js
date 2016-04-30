@@ -1,53 +1,93 @@
-// import {Component, Input} from 'angular2/core';
-// import {NavBar} from './nav-bar.component';
-// import {Photo} from '../models/photo';
-// import {PhotoService} from '../services/photo.service';
-// import {ImageComments} from './image-comments.component';
-// import {UserService} from '../services/user.service';
-// import {User} from '../models/user';
-// import {RouteParams} from 'angular2/router';
-//
-// @Component({
-//   selector: 'image-detail',
-//   templateUrl: 'app/components/image-detail.component.html',
-//   directives: [ImageComments]
-// })
-// export class ImageDetail {
-//   photo: Photo;
-//   like: string;
-//   user: User;
-//
-//   constructor ( private _photoService: PhotoService, private _userService: UserService, private _routeParams: RouteParams){}
-//
-//   goBack() {
-//     window.history.back();
-//   }
-//
-//   ngOnInit() {
-//     let id = this._routeParams.get('id');
-//     this.photo=this._photoService.getPhotoById(id);
-//     this.user=this._userService.getUserById(this.photo.userId);
-//
-//     if (this.user.liked.filter(photoId => photoId == this.photo.photoId)[0]) {
-//       this.like="Unlike";
-//     } else {
-//       this.like="Like";
-//     }
-//   }
-//
-//   likeDisplay() {
-//     if (this.like =="Like") {
-//       this.like="Unlike";
-//       this.photo.likes+=1;
-//       this.user.liked.push(this.photo.photoId);
-//     } else {
-//       this.like="Like";
-//       this.photo.likes-=1;
-//       var index = this.user.liked.indexOf(this.photo.photoId, 0);
-//       if (index > -1) {
-//         this.user.liked.splice(index, 1);
-//       }
-//     }
-//   }
-// }
+System.register(['angular2/core', '../models/photo', '../services/photo.service', '../services/user.service', 'angular2/router'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
+    var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var __metadata = (this && this.__metadata) || function (k, v) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    };
+    var core_1, photo_1, photo_service_1, user_service_1, router_1;
+    var ImageDetail;
+    return {
+        setters:[
+            function (core_1_1) {
+                core_1 = core_1_1;
+            },
+            function (photo_1_1) {
+                photo_1 = photo_1_1;
+            },
+            function (photo_service_1_1) {
+                photo_service_1 = photo_service_1_1;
+            },
+            function (user_service_1_1) {
+                user_service_1 = user_service_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
+            }],
+        execute: function() {
+            ImageDetail = (function () {
+                function ImageDetail(photoService, userService, routeParams) {
+                    var _this = this;
+                    this.photoService = photoService;
+                    this.userService = userService;
+                    this.routeParams = routeParams;
+                    this.photo = new photo_1.Photo();
+                    var photoId = Number.parseInt(this.routeParams.get('id'));
+                    this.photoService.getPhotoById(photoId).subscribe(function (photo) {
+                        _this.photo = JSON.parse(JSON.parse(JSON.stringify(photo))._body);
+                        console.log(_this.photo);
+                    }, function (error) { return console.log(error); });
+                    this.userService.getUserByName(localStorage.getItem("currentUserName")).subscribe(function (user) {
+                        _this.user = JSON.parse(JSON.parse(JSON.stringify(user))._body);
+                        if (_this.user.likedPhotoList.filter(function (photo) { return photo.photoId == _this.photo.photoId; })[0]) {
+                            _this.like = "Unlike";
+                        }
+                        else {
+                            _this.like = "Like";
+                        }
+                    }, function (error) { return console.log(error); });
+                }
+                ImageDetail.prototype.goBack = function () {
+                    window.history.back();
+                };
+                ImageDetail.prototype.ngOnInit = function () {
+                };
+                ImageDetail.prototype.likeDisplay = function () {
+                    if (this.like == "Like") {
+                        this.like = "Unlike";
+                        this.photo.likes += 1;
+                        this.user.likedPhotoList.push(this.photo);
+                        console.log(this.user.likedPhotoList);
+                        this.userService.updateUser(this.user).subscribe();
+                        this.photoService.updatePhoto(this.photo).subscribe();
+                    }
+                    else {
+                        this.like = "Like";
+                        this.photo.likes -= 1;
+                        var index = this.user.likedPhotoList.indexOf(this.photo, 0);
+                        if (index > -1) {
+                            this.user.likedPhotoList.splice(index, 1);
+                        }
+                        this.userService.updateUser(this.user).subscribe();
+                        this.photoService.updatePhoto(this.photo).subscribe();
+                    }
+                };
+                ImageDetail = __decorate([
+                    core_1.Component({
+                        selector: 'image-detail',
+                        templateUrl: 'app/components/image-detail.component.html',
+                    }), 
+                    __metadata('design:paramtypes', [photo_service_1.PhotoService, user_service_1.UserService, router_1.RouteParams])
+                ], ImageDetail);
+                return ImageDetail;
+            }());
+            exports_1("ImageDetail", ImageDetail);
+        }
+    }
+});
 //# sourceMappingURL=image-detail.component.js.map

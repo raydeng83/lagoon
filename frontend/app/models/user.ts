@@ -6,7 +6,7 @@ export class User {
   public lastName: string;
   public userName: string;
   public password: string;
-  public joinDate: string;
+  public created: Date;
   public photoList: Photo[];
   public likedPhotoList: Photo[];
 }

@@ -1,7 +1,9 @@
 package com.lagoon.backend.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -23,8 +25,8 @@ public class User {
     private String userName;
     private String password;
 
-//    @CreationTimestamp
-//    private Date created;
+    @CreationTimestamp
+    private Date created;
 //
 //    @UpdateTimestamp
 //    private Date updated;
@@ -76,13 +78,7 @@ public class User {
         this.password = password;
     }
 
-//    public Date getCreated() {
-//        return created;
-//    }
-//
-//    public void setCreated(Date created) {
-//        this.created = created;
-//    }
+
 //
 //    public Date getUpdated() {
 //        return updated;

@@ -1,4 +1,4 @@
-System.register(['angular2/core', './components/home.component', './services/user.service', './services/photo.service', 'angular2/router', './components/nav-bar.component', './components/login.component', './services/login.service', 'angular2/http', './components/my-album.component', './components/register.component', './services/register.service', './components/add-photo.component', './services/upload-photo.service'], function(exports_1, context_1) {
+System.register(['angular2/core', './components/home.component', './services/user.service', './services/photo.service', 'angular2/router', './components/image-detail.component', './components/nav-bar.component', './components/login.component', './services/login.service', 'angular2/http', './components/my-album.component', './components/register.component', './services/register.service', './components/add-photo.component', './services/upload-photo.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './components/home.component', './services/use
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, home_component_1, user_service_1, photo_service_1, router_1, router_2, nav_bar_component_1, login_component_1, login_service_1, http_1, my_album_component_1, register_component_1, register_service_1, add_photo_component_1, upload_photo_service_1;
+    var core_1, home_component_1, user_service_1, photo_service_1, router_1, router_2, image_detail_component_1, nav_bar_component_1, login_component_1, login_service_1, http_1, my_album_component_1, register_component_1, register_service_1, add_photo_component_1, upload_photo_service_1;
     var AppComponent;
     return {
         setters:[
@@ -29,6 +29,9 @@ System.register(['angular2/core', './components/home.component', './services/use
             function (router_1_1) {
                 router_1 = router_1_1;
                 router_2 = router_1_1;
+            },
+            function (image_detail_component_1_1) {
+                image_detail_component_1 = image_detail_component_1_1;
             },
             function (nav_bar_component_1_1) {
                 nav_bar_component_1 = nav_bar_component_1_1;
@@ -70,7 +73,7 @@ System.register(['angular2/core', './components/home.component', './services/use
                     }),
                     router_1.RouteConfig([
                         { path: '/home', name: 'Home', component: home_component_1.HomeComponent, useAsDefault: true },
-                        // {path: '/image-detail/:id', name: 'ImageDetail', component: ImageDetail},
+                        { path: '/image-detail/:id', name: 'ImageDetail', component: image_detail_component_1.ImageDetail },
                         { path: '/login', name: 'Login', component: login_component_1.Login },
                         { path: '/my-album', name: 'MyAlbum', component: my_album_component_1.MyAlbum },
                         { path: '/register', name: "Register", component: register_component_1.Register },

@@ -29,12 +29,20 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     var url = "http://localhost:8080/photo/allPhotos";
                     return this.http.get(url);
                 };
-                PhotoService.prototype.getPhotoById = function (id) {
+                PhotoService.prototype.getPhotoById = function (photoId) {
+                    var tokenUrl1 = "http://localhost:8080/rest/photo/photoId";
+                    var headers1 = new http_1.Headers({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem("token") });
+                    return this.http.post(tokenUrl1, JSON.stringify(photoId), { headers: headers1 });
                 };
                 PhotoService.prototype.getPhotosByUser = function (user) {
                     var tokenUrl1 = "http://localhost:8080/rest/photo/user";
                     var headers1 = new http_1.Headers({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem("token") });
                     return this.http.post(tokenUrl1, JSON.stringify(user), { headers: headers1 });
+                };
+                PhotoService.prototype.updatePhoto = function (photo) {
+                    var tokenUrl1 = "http://localhost:8080/rest/photo/update";
+                    var headers1 = new http_1.Headers({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem("token") });
+                    return this.http.post(tokenUrl1, JSON.stringify(photo), { headers: headers1 });
                 };
                 PhotoService = __decorate([
                     core_1.Injectable(), 

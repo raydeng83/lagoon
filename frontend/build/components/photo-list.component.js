@@ -29,7 +29,7 @@ System.register(['angular2/core', '../services/photo.service', 'angular2/router'
                     var _this = this;
                     this.photoService = photoService;
                     this._router = _router;
-                    this.photoService.getPhotos().subscribe(function (data) { return _this.photos = JSON.parse(JSON.parse(JSON.stringify(data))._body); }, function (error) { return console.log(error); });
+                    this.photoService.getPhotos().subscribe(function (data) { return console.log(_this.photos = JSON.parse(JSON.parse(JSON.stringify(data))._body)); }, function (error) { return console.log(error); });
                 }
                 PhotoList.prototype.onSelect = function (photo) {
                     this.selectedPhoto = photo;

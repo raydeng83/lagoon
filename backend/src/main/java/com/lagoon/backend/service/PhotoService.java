@@ -15,4 +15,6 @@ public interface PhotoService {
 
     List<Photo> findByUser(User user);
 
+    Photo findByPhotoId(Long photoId);
+
 }

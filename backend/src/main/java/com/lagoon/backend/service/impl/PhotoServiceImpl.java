@@ -31,4 +31,7 @@ public class PhotoServiceImpl implements PhotoService {
         return photoDao.findByUser(user);
     }
 
+    public Photo findByPhotoId(Long photoId) {
+        return photoDao.findByPhotoId(photoId);
+    }
 }

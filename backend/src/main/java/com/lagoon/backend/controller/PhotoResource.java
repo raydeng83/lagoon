@@ -61,4 +61,14 @@ public class PhotoResource {
     public List<Photo> getPhotosByUser (@RequestBody User user) {
         return photoService.findByUser(user);
     }
+
+    @RequestMapping(value="/photo/photoId", method = RequestMethod.POST)
+    public Photo getPhotoByPhotoId (@RequestBody Long photoId) {
+        return photoService.findByPhotoId(photoId);
+    }
+
+    @RequestMapping(value = "/photo/update", method = RequestMethod.POST)
+    public Photo updatePhoto(@RequestBody Photo photo) {
+        return photoService.save(photo);
+    }
 }

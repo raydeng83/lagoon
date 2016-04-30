@@ -1,9 +1,13 @@
 package com.lagoon.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,8 +23,8 @@ public class Photo {
     private String description;
     private String imageName;
 
-//    @CreationTimestamp
-//    private Date created;
+    @CreationTimestamp
+    private Date created;
 //
 //    @UpdateTimestamp
 //    private Date updated;
@@ -30,6 +34,7 @@ public class Photo {
     private User user;
 
     @ManyToMany(mappedBy = "likedPhotoList", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<User> likedUserList;
 
     private int likes;
@@ -61,13 +66,13 @@ public class Photo {
         this.description = description;
     }
 
-//    public Date getCreated() {
-//        return created;
-//    }
-//
-//    public void setCreated(Date created) {
-//        this.created = created;
-//    }
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
 //
 //    public Date getUpdated() {
 //        return updated;

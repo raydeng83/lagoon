@@ -18,4 +18,5 @@ public interface PhotoDao extends CrudRepository<Photo, Long> {
 
     List<Photo> findAll();
 
+    Photo findByPhotoId(Long photoId);
 }
