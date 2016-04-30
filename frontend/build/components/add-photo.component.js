@@ -42,8 +42,9 @@ System.register(['angular2/core', '../models/photo', '../services/upload-photo.s
                     var _this = this;
                     this.userService.getUserByName(localStorage.getItem("currentUserName")).subscribe(function (user) {
                         _this.user = JSON.parse(JSON.parse(JSON.stringify(user))._body);
+                        console.log(_this.user);
                         _this.newPhoto.user = _this.user;
-                        _this.addPhotoService.sendUser(_this.newPhoto)
+                        _this.addPhotoService.sendPhoto(_this.newPhoto)
                             .subscribe(function (data) {
                             _this.photoAdded = true;
                             _this.newPhoto = new photo_1.Photo();

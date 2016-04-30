@@ -7,7 +7,7 @@ export class Photo {
   public title: string;
   public description: string;
   public user: User;
-  
+  public imageName: string;
   public likedByUserList: User[];
   public likes: number;
   public commentList: Comment[];

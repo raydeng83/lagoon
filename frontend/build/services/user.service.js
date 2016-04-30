@@ -32,7 +32,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                 UserService.prototype.getUserByName = function (username) {
                     var tokenUrl1 = "http://localhost:8080/rest/user/userName";
                     var headers1 = new http_1.Headers({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem("token") });
-                    return this.http.post(tokenUrl1, JSON.stringify(username), { headers: headers1 });
+                    return this.http.post(tokenUrl1, username, { headers: headers1 });
                 };
                 UserService = __decorate([
                     core_1.Injectable(), 

@@ -1,6 +1,7 @@
 package com.lagoon.backend.model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -29,6 +30,7 @@ public class User {
 //    private Date updated;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<Photo> photoList;
 
     @ManyToMany

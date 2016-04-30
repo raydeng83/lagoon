@@ -21,12 +21,13 @@ export class MyAlbum {
   constructor (private photoService: PhotoService, private _router: Router, private userService: UserService) {
     this.userService.getUserByName(localStorage.getItem("currentUserName")).subscribe(
       user => {
-        this.user = JSON.parse(JSON.stringify(user))._body;
+        this.user = JSON.parse(JSON.parse(JSON.stringify(user))._body);
         console.log(this.user);
-        // this.photoService.getPhotosByUser(this.user).subscribe(
-        //   photos => this.photos = JSON.parse(JSON.parse(JSON.stringify(user))._body),
-        //   error => console.log(error)
-        // );
+        this.photoService.getPhotosByUser(this.user).subscribe(
+          photos => {console.log(this.photos = JSON.parse(JSON.parse(JSON.stringify(user))._body).photoList);
+          },
+          error => console.log(error)
+        );
       },
       error => console.log(error)
     );

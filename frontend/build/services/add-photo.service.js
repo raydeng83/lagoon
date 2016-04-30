@@ -25,7 +25,7 @@ System.register(["angular2/core", 'angular2/http'], function(exports_1, context_
                 function AddPhotoService(http) {
                     this.http = http;
                 }
-                AddPhotoService.prototype.sendUser = function (photo) {
+                AddPhotoService.prototype.sendPhoto = function (photo) {
                     var url = "http://localhost:8080/rest/photo/add";
                     var headers1 = new http_1.Headers({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem("token") });
                     return this.http.post(url, JSON.stringify(photo), { headers: headers1 });

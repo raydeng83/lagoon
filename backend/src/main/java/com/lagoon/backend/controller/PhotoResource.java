@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by lede on 4/29/16.
@@ -25,6 +26,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/rest")
 public class PhotoResource {
+
+    private String imageName;
 
     @Autowired
     private PhotoService photoService;
@@ -35,6 +38,7 @@ public class PhotoResource {
         Iterator<String> it = multipartRequest.getFileNames();
         MultipartFile multipartFile = multipartRequest.getFile(it.next());
         String fileName = multipartFile.getOriginalFilename();
+        imageName=fileName;
 
         String path = new File("src/main/resources/static/images").getAbsolutePath()+"/"+fileName;
         try {
@@ -49,6 +53,7 @@ public class PhotoResource {
 
     @RequestMapping(value = "/photo/add", method = RequestMethod.POST)
     public Photo addPhoto(@RequestBody Photo photo) {
+        photo.setImageName(imageName);
         return photoService.save(photo);
     }
 

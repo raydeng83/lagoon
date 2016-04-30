@@ -35,12 +35,11 @@ System.register(['angular2/core', '../services/photo.service', '../services/user
                     this._router = _router;
                     this.userService = userService;
                     this.userService.getUserByName(localStorage.getItem("currentUserName")).subscribe(function (user) {
-                        _this.user = JSON.parse(JSON.stringify(user))._body;
+                        _this.user = JSON.parse(JSON.parse(JSON.stringify(user))._body);
                         console.log(_this.user);
-                        // this.photoService.getPhotosByUser(this.user).subscribe(
-                        //   photos => this.photos = JSON.parse(JSON.parse(JSON.stringify(user))._body),
-                        //   error => console.log(error)
-                        // );
+                        _this.photoService.getPhotosByUser(_this.user).subscribe(function (photos) {
+                            console.log(_this.photos = JSON.parse(JSON.parse(JSON.stringify(user))._body).photoList);
+                        }, function (error) { return console.log(error); });
                     }, function (error) { return console.log(error); });
                 }
                 MyAlbum.prototype.onSelect = function (photo) {

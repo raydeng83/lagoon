@@ -1,5 +1,8 @@
 package com.lagoon.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,6 +17,7 @@ public class Photo {
     private String photoName;
     private String title;
     private String description;
+    private String imageName;
 
 //    @CreationTimestamp
 //    private Date created;
@@ -22,6 +26,7 @@ public class Photo {
 //    private Date updated;
 
     @ManyToOne
+    @JsonBackReference
     private User user;
 
     @ManyToMany(mappedBy = "likedPhotoList", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -110,5 +115,13 @@ public class Photo {
 
     public void setPhotoName(String photoName) {
         this.photoName = photoName;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 }

@@ -18,6 +18,6 @@ export class UserService {
   getUserByName(username: string) {
     let tokenUrl1 = "http://localhost:8080/rest/user/userName";
     let headers1 = new Headers({'Content-Type': 'application/json', 'Authorization': 'Bearer '+localStorage.getItem("token")});
-    return this.http.post(tokenUrl1, JSON.stringify(username), {headers: headers1});
+    return this.http.post(tokenUrl1, username, {headers: headers1});
   }
 }
