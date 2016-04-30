@@ -1,4 +1,4 @@
-System.register(['angular2/core', '../models/photo', '../services/photo.service', '../services/user.service', 'angular2/router'], function(exports_1, context_1) {
+System.register(['angular2/core', '../models/photo', '../services/photo.service', './image-comments.component', '../services/user.service', 'angular2/router'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', '../models/photo', '../services/photo.service'
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, photo_1, photo_service_1, user_service_1, router_1;
+    var core_1, photo_1, photo_service_1, image_comments_component_1, user_service_1, router_1;
     var ImageDetail;
     return {
         setters:[
@@ -22,6 +22,9 @@ System.register(['angular2/core', '../models/photo', '../services/photo.service'
             },
             function (photo_service_1_1) {
                 photo_service_1 = photo_service_1_1;
+            },
+            function (image_comments_component_1_1) {
+                image_comments_component_1 = image_comments_component_1_1;
             },
             function (user_service_1_1) {
                 user_service_1 = user_service_1_1;
@@ -41,15 +44,17 @@ System.register(['angular2/core', '../models/photo', '../services/photo.service'
                     this.photoService.getPhotoById(photoId).subscribe(function (photo) {
                         _this.photo = JSON.parse(JSON.parse(JSON.stringify(photo))._body);
                         console.log(_this.photo);
-                    }, function (error) { return console.log(error); });
-                    this.userService.getUserByName(localStorage.getItem("currentUserName")).subscribe(function (user) {
-                        _this.user = JSON.parse(JSON.parse(JSON.stringify(user))._body);
-                        if (_this.user.likedPhotoList.filter(function (photo) { return photo.photoId == _this.photo.photoId; })[0]) {
-                            _this.like = "Unlike";
-                        }
-                        else {
-                            _this.like = "Like";
-                        }
+                        _this.userService.getUserByName(localStorage.getItem("currentUserName")).subscribe(function (user) {
+                            _this.user = JSON.parse(JSON.parse(JSON.stringify(user))._body);
+                            console.log(_this.user);
+                            console.log(_this.photo);
+                            if (_this.user.likedPhotoList.filter(function (photo) { return photo.photoId == _this.photo.photoId; })[0]) {
+                                _this.like = "Unlike";
+                            }
+                            else {
+                                _this.like = "Like";
+                            }
+                        }, function (error) { return console.log(error); });
                     }, function (error) { return console.log(error); });
                 }
                 ImageDetail.prototype.goBack = function () {
@@ -60,19 +65,28 @@ System.register(['angular2/core', '../models/photo', '../services/photo.service'
                 ImageDetail.prototype.likeDisplay = function () {
                     if (this.like == "Like") {
                         this.like = "Unlike";
-                        this.photo.likes += 1;
                         this.user.likedPhotoList.push(this.photo);
                         console.log(this.user.likedPhotoList);
+                        this.photo.likes += 1;
                         this.userService.updateUser(this.user).subscribe();
                         this.photoService.updatePhoto(this.photo).subscribe();
                     }
                     else {
                         this.like = "Like";
-                        this.photo.likes -= 1;
-                        var index = this.user.likedPhotoList.indexOf(this.photo, 0);
-                        if (index > -1) {
-                            this.user.likedPhotoList.splice(index, 1);
+                        // var index = this.user.likedPhotoList.indexOf(this.photo, 0);
+                        console.log(this.photo);
+                        console.log(this.user.likedPhotoList[0]);
+                        for (var i = 0; i < this.user.likedPhotoList.length; i++) {
+                            if (this.user.likedPhotoList[i].photoId == this.photo.photoId) {
+                                this.user.likedPhotoList.splice(i, 1);
+                            }
                         }
+                        // console.log(index);
+                        // if (index > -1) {
+                        //   this.user.likedPhotoList.splice(index, 1);
+                        // }
+                        this.photo.likes -= 1;
+                        console.log(this.user.likedPhotoList);
                         this.userService.updateUser(this.user).subscribe();
                         this.photoService.updatePhoto(this.photo).subscribe();
                     }
@@ -81,6 +95,7 @@ System.register(['angular2/core', '../models/photo', '../services/photo.service'
                     core_1.Component({
                         selector: 'image-detail',
                         templateUrl: 'app/components/image-detail.component.html',
+                        directives: [image_comments_component_1.ImageComments]
                     }), 
                     __metadata('design:paramtypes', [photo_service_1.PhotoService, user_service_1.UserService, router_1.RouteParams])
                 ], ImageDetail);

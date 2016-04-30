@@ -33,9 +33,9 @@ public class Photo {
     @JsonBackReference
     private User user;
 
-    @ManyToMany(mappedBy = "likedPhotoList", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonIgnore
-    private List<User> likedUserList;
+//    @ManyToMany(mappedBy = "likedPhotoList", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JsonIgnore
+//    private List<User> likedUserList;
 
     private int likes;
 
@@ -106,13 +106,13 @@ public class Photo {
         this.user = user;
     }
 
-    public List<User> getLikedUserList() {
-        return likedUserList;
-    }
-
-    public void setLikedUserList(List<User> likedUserList) {
-        this.likedUserList = likedUserList;
-    }
+//    public List<User> getLikedUserList() {
+//        return likedUserList;
+//    }
+//
+//    public void setLikedUserList(List<User> likedUserList) {
+//        this.likedUserList = likedUserList;
+//    }
 
     public String getPhotoName() {
         return photoName;

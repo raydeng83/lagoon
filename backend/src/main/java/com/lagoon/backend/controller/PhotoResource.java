@@ -69,6 +69,8 @@ public class PhotoResource {
 
     @RequestMapping(value = "/photo/update", method = RequestMethod.POST)
     public Photo updatePhoto(@RequestBody Photo photo) {
-        return photoService.save(photo);
+        Photo currentPhoto = photoService.findByPhotoId(photo.getPhotoId());
+        currentPhoto.setLikes(photo.getLikes());
+        return photoService.save(currentPhoto);
     }
 }

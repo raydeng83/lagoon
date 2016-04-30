@@ -1,4 +1,4 @@
-<!-- <div class="ui text container">
+<div class="ui text container">
   <h3>{{user.userName}}</h3>
   <h4>{{photo.title}}</h4>
   <p>{{photo.description}}</p>
@@ -10,7 +10,7 @@
       <div class="ui grid">
         <div class="two wide column">
           <img src="resources/static/pic/avatar1.png" class="ui image tiny">
-          <span class="author">{{_userService.getUserById(comment.userId).userName}}</span>
+          <span class="author">{{localStorage.getItem("currentUserName")}}</span>
         </div>
         <div class="fourteen wide column">
           <div class="ui blue message">
@@ -38,4 +38,4 @@
         </form>
       </div>
     </div>
-  </div> -->
+  </div>
