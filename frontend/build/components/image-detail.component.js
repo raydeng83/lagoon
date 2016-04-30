@@ -43,11 +43,8 @@ System.register(['angular2/core', '../models/photo', '../services/photo.service'
                     var photoId = Number.parseInt(this.routeParams.get('id'));
                     this.photoService.getPhotoById(photoId).subscribe(function (photo) {
                         _this.photo = JSON.parse(JSON.parse(JSON.stringify(photo))._body);
-                        console.log(_this.photo);
                         _this.userService.getUserByName(localStorage.getItem("currentUserName")).subscribe(function (user) {
                             _this.user = JSON.parse(JSON.parse(JSON.stringify(user))._body);
-                            console.log(_this.user);
-                            console.log(_this.photo);
                             if (_this.user.likedPhotoList.filter(function (photo) { return photo.photoId == _this.photo.photoId; })[0]) {
                                 _this.like = "Unlike";
                             }
@@ -66,7 +63,6 @@ System.register(['angular2/core', '../models/photo', '../services/photo.service'
                     if (this.like == "Like") {
                         this.like = "Unlike";
                         this.user.likedPhotoList.push(this.photo);
-                        console.log(this.user.likedPhotoList);
                         this.photo.likes += 1;
                         this.userService.updateUser(this.user).subscribe();
                         this.photoService.updatePhoto(this.photo).subscribe();
@@ -74,8 +70,6 @@ System.register(['angular2/core', '../models/photo', '../services/photo.service'
                     else {
                         this.like = "Like";
                         // var index = this.user.likedPhotoList.indexOf(this.photo, 0);
-                        console.log(this.photo);
-                        console.log(this.user.likedPhotoList[0]);
                         for (var i = 0; i < this.user.likedPhotoList.length; i++) {
                             if (this.user.likedPhotoList[i].photoId == this.photo.photoId) {
                                 this.user.likedPhotoList.splice(i, 1);
@@ -86,7 +80,6 @@ System.register(['angular2/core', '../models/photo', '../services/photo.service'
                         //   this.user.likedPhotoList.splice(index, 1);
                         // }
                         this.photo.likes -= 1;
-                        console.log(this.user.likedPhotoList);
                         this.userService.updateUser(this.user).subscribe();
                         this.photoService.updatePhoto(this.photo).subscribe();
                     }

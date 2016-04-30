@@ -22,12 +22,9 @@ export class ImageDetail {
     this.photoService.getPhotoById(photoId).subscribe(
       photo => {
         this.photo = JSON.parse(JSON.parse(JSON.stringify(photo))._body);
-        console.log(this.photo);
         this.userService.getUserByName(localStorage.getItem("currentUserName")).subscribe(
           user => {
             this.user = JSON.parse(JSON.parse(JSON.stringify(user))._body);
-            console.log(this.user);
-            console.log(this.photo);
             if (this.user.likedPhotoList.filter(photo => photo.photoId == this.photo.photoId)[0]) {
               this.like="Unlike";
             } else {
@@ -39,10 +36,6 @@ export class ImageDetail {
       },
       error => console.log(error)
     );
-
-
-
-
   }
 
   goBack() {
@@ -57,15 +50,12 @@ export class ImageDetail {
     if (this.like =="Like") {
       this.like="Unlike";
       this.user.likedPhotoList.push(this.photo);
-      console.log(this.user.likedPhotoList);
       this.photo.likes+=1;
       this.userService.updateUser(this.user).subscribe();
       this.photoService.updatePhoto(this.photo).subscribe();
     } else {
       this.like="Like";
       // var index = this.user.likedPhotoList.indexOf(this.photo, 0);
-      console.log(this.photo);
-      console.log(this.user.likedPhotoList[0]);
       for (let i=0; i<this.user.likedPhotoList.length; i++) {
         if (this.user.likedPhotoList[i].photoId == this.photo.photoId) {
             this.user.likedPhotoList.splice(i, 1);
@@ -76,7 +66,6 @@ export class ImageDetail {
       //   this.user.likedPhotoList.splice(index, 1);
       // }
       this.photo.likes-=1;
-      console.log(this.user.likedPhotoList);
       this.userService.updateUser(this.user).subscribe();
       this.photoService.updatePhoto(this.photo).subscribe();
     }

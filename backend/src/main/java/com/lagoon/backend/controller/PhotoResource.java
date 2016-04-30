@@ -1,7 +1,9 @@
 package com.lagoon.backend.controller;
 
+import com.lagoon.backend.model.Comment;
 import com.lagoon.backend.model.Photo;
 import com.lagoon.backend.model.User;
+import com.lagoon.backend.service.CommentService;
 import com.lagoon.backend.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,6 +33,9 @@ public class PhotoResource {
 
     @Autowired
     private PhotoService photoService;
+
+    @Autowired
+    private CommentService commentService;
 
     @RequestMapping(value = "/photo/upload", method = RequestMethod.POST)
     public String upload(HttpServletResponse response, HttpServletRequest request) {
@@ -68,9 +73,16 @@ public class PhotoResource {
     }
 
     @RequestMapping(value = "/photo/update", method = RequestMethod.POST)
-    public Photo updatePhoto(@RequestBody Photo photo) {
+    public void updatePhoto(@RequestBody Photo photo) {
         Photo currentPhoto = photoService.findByPhotoId(photo.getPhotoId());
         currentPhoto.setLikes(photo.getLikes());
-        return photoService.save(currentPhoto);
+        photoService.save(currentPhoto);
+
+//        List<Comment> list = commentService.findByPhotoId(currentPhoto.getPhotoId());
+//
+//        for (Comment comment : list) {
+//            comment.setPhoto(currentPhoto);
+//            commentService.save(comment);
+//        }
     }
 }

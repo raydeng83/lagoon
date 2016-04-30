@@ -1,5 +1,6 @@
 package com.lagoon.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -17,10 +18,10 @@ public class Comment {
     private String content;
 
     @ManyToOne
+    @JsonIgnore
     private Photo photo;
-
-    @OneToOne
-    private User user;
+    private Long photoId;
+    private String userName;
 
 //    @CreationTimestamp
 //    private Date created;
@@ -52,12 +53,20 @@ public class Comment {
         this.photo = photo;
     }
 
-    public User getUser() {
-        return user;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public Long getPhotoId() {
+        return photoId;
+    }
+
+    public void setPhotoId(Long photoId) {
+        this.photoId = photoId;
     }
 
     //    public Date getCreated() {

@@ -3,32 +3,54 @@ import {Photo} from '../models/photo';
 import {User} from '../models/user';
 import {UserService} from '../services/user.service';
 import {Comment} from '../models/comment';
+import {CommentService} from '../services/comment.service';
+import {PhotoService} from '../services/photo.service';
 
 @Component ({
   selector: 'image-comments',
+  providers: [CommentService],
   templateUrl: 'app/components/image-comments.component.html'
 })
 export class ImageComments {
   @Input('photo') photo: Photo;
-
-  user: User;
+  myLocalStorage = localStorage;
+  user: User=new User();
   newComment = new Comment ();
 
-  constructor (private userService: UserService) {
+  constructor (private userService: UserService, private commentService: CommentService, private photoService: PhotoService) {
+    console.log(this.photo);
     this.userService.getUserByName(localStorage.getItem("currentUserName")).subscribe(
       user => {
         this.user = JSON.parse(JSON.parse(JSON.stringify(user))._body);
       },
       error => console.log(error)
     )
-
   }
 
-  ngOnInit() {
+  onInit() {
+
   }
 
   onSubmit() {
-    this.photo.commentList.push(this.newComment);
+    console.log(this.photo);
+    console.log(this.photo.commentList);
+    this.newComment.photo=this.photo;
+    this.newComment.userName=this.user.userName;
+    this.newComment.photoId=this.photo.photoId;
+    this.commentService.addComment(this.newComment).subscribe(
+      photo => this.photoService.getPhotoById(this.photo.photoId).subscribe(
+        photo => this.photo = JSON.parse(JSON.parse(JSON.stringify(photo))._body),
+        error => console.log(error)
+      )
+      // error => console.log(error)
+    );
+    // this.photo.commentList.push(this.newComment);
+
+
     this.newComment = new Comment();
   }
+
+
+
+
 }

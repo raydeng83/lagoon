@@ -1,9 +1,7 @@
 package com.lagoon.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -39,7 +37,7 @@ public class Photo {
 
     private int likes;
 
-    @OneToMany(mappedBy = "photo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "photo",  fetch = FetchType.EAGER)
     private List<Comment> commentList;
 
     public Long getPhotoId() {
