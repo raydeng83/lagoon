@@ -34,8 +34,5 @@ export class AddPhoto {
       },
       error => console.log(error)
     )
-
-
-
   }
 }
