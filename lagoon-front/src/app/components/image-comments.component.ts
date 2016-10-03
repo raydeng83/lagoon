@@ -9,7 +9,7 @@ import {PhotoService} from '../services/photo.service';
 @Component ({
   selector: 'image-comments',
   providers: [CommentService],
-  templateUrl: './/image-comments.component.html'
+  templateUrl: './image-comments.component.html'
 })
 export class ImageComments {
   @Input('photo') photo: Photo;

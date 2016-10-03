@@ -15,10 +15,15 @@ export class ImageDetail {
   photo: Photo=new Photo();
   like: string;
   user: User;
+  photoId: number;
 
-  constructor ( private photoService: PhotoService, private userService: UserService, private params: Params){
-    let photoId = Number.parseInt(params['id']);
-    this.photoService.getPhotoById(photoId).subscribe(
+  constructor ( private photoService: PhotoService, private userService: UserService, private route: ActivatedRoute){
+     this.route.params.forEach((params: Params) => {
+     let photoId = Number.parseInt(params['id']);
+    });
+
+    
+    this.photoService.getPhotoById(this.photoId).subscribe(
       photo => {
         this.photo = JSON.parse(JSON.parse(JSON.stringify(photo))._body);
         this.userService.getUserByName(localStorage.getItem("currentUserName")).subscribe(

@@ -2,7 +2,7 @@
   <div class='photo-list'>
     <div clas="ui grid">
        <div class="ui horizontal segments" >
-         <span *ngFor="#photo of photos" >
+         <span *ngFor="let photo of photos" >
            <div class="ui segment">
              <img src='http://localhost:8080/images/{{photo.imageName}}' class='ui medium image' (click)="onSelect(photo)" style="cursor: pointer">
              <div class="ui grid">
@@ -18,6 +18,6 @@
         </div>
       </div>
 
-      <a class="ui button" [routerLink]="['AddPhoto']" >Add Photo</a>
+      <a class="ui button" routerLink="/add-photo" routerLinkActive="active">Add Photo</a>
   </div>
 </div>
