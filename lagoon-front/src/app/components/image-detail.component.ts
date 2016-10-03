@@ -5,7 +5,7 @@ import {PhotoService} from '../services/photo.service';
 import {ImageComments} from './image-comments.component';
 import {UserService} from '../services/user.service';
 import {User} from '../models/user';
-import {RouteParams} from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'image-detail',
@@ -16,8 +16,8 @@ export class ImageDetail {
   like: string;
   user: User;
 
-  constructor ( private photoService: PhotoService, private userService: UserService, private routeParams: RouteParams){
-    let photoId = Number.parseInt(this.routeParams.get('id'));
+  constructor ( private photoService: PhotoService, private userService: UserService, private params: Params){
+    let photoId = Number.parseInt(params['id']);
     this.photoService.getPhotoById(photoId).subscribe(
       photo => {
         this.photo = JSON.parse(JSON.parse(JSON.stringify(photo))._body);
