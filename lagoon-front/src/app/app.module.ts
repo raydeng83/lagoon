@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { routing }              from './app.routing';
 
+
 import { AppComponent } from './app.component';
 import {AddPhoto} from './components/add-photo.component';
 import {HomeComponent} from './components/home.component';

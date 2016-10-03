@@ -8,7 +8,7 @@ import {User} from '../models/user';
 @Component({
   selector: 'add-photo',
   providers: [UploadPhotoService,AddPhotoService],
-  templateUrl: 'app/components/add-photo.component.html'
+  templateUrl: './add-photo.component.html'
 })
 export class AddPhoto {
   newPhoto: Photo = new Photo();

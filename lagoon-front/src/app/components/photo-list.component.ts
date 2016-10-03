@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'photo-list',
-  templateUrl: 'app/components/photo-list.component.html'
+  templateUrl: './photo-list.component.html'
 })
 export class PhotoList {
   photos: Photo[];

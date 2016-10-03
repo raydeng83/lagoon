@@ -1,11 +1,10 @@
 import {Component} from '@angular/core';
 import {User} from '../models/User';
-import {NgForm}    from '@angular/common';
 import {RegisterService} from '../services/register.service';
 
 @Component({
   selector: 'register',
-  templateUrl: 'app/Components/register.component.html'
+  templateUrl: './register.component.html'
 })
 export class Register {
   newUser: User = new User();

@@ -4,7 +4,7 @@ import {LoginService} from '../services/login.service';
 
 @Component({
   selector: 'login',
-  templateUrl: 'app/components/login.component.html'
+  templateUrl: './login.component.html'
 })
 export class Login {
   private model = {'username':'', 'password':''};

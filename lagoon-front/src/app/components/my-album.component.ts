@@ -4,12 +4,11 @@ import {UserService} from '../services/user.service';
 import {User} from '../models/user';
 import {Photo} from '../models/photo';
 import {Router} from '@angular/router';
-import {ROUTER_DIRECTIVES} from '@angular/router';
 
 
 @Component({
   selector: 'my-album',
-  templateUrl: 'app/components/my-album.component.html'
+  templateUrl: './my-album.component.html'
 })
 export class MyAlbum {
 

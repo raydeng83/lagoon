@@ -9,7 +9,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'image-detail',
-  templateUrl: 'app/components/image-detail.component.html'
+  templateUrl: './image-detail.component.html'
 })
 export class ImageDetail {
   photo: Photo=new Photo();
