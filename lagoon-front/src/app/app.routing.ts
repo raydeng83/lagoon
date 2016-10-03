@@ -39,7 +39,7 @@ const appRoutes: Routes = [
   {
     path: 'add-photo',
     component: AddPhoto
-  },
+  }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

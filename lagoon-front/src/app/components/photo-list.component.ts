@@ -13,7 +13,7 @@ export class PhotoList {
   photos: Photo[];
   selectedPhoto: Photo;
 
-  constructor (private photoService: PhotoService, private _router: Router) {
+  constructor (private photoService: PhotoService, private router: Router) {
     this.photoService.getPhotos().subscribe(
       data => console.log(this.photos = JSON.parse(JSON.parse(JSON.stringify(data))._body)),
       error => console.log(error)
@@ -22,6 +22,6 @@ export class PhotoList {
 
   onSelect(photo:Photo) {
     this.selectedPhoto = photo;
-    this._router.navigate(['ImageDetail', {id: this.selectedPhoto.photoId}]);
+    this.router.navigate(['/image-detail', this.selectedPhoto.photoId]);
   }
 }

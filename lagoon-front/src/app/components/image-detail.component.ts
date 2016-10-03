@@ -19,7 +19,7 @@ export class ImageDetail {
 
   constructor ( private photoService: PhotoService, private userService: UserService, private route: ActivatedRoute){
      this.route.params.forEach((params: Params) => {
-     let photoId = Number.parseInt(params['id']);
+     this.photoId = Number.parseInt(params['id']);
     });
 
     

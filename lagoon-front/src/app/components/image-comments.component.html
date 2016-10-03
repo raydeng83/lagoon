@@ -32,7 +32,7 @@
       <div class="fourteen wide column">
         <form class="ui form" (ngSubmit)="onSubmit()" #commentForm="ngForm">
           <div class="field">
-            <textarea #words rows="3" placeholder="Add a comment" required [(ngModel)]="newComment.content"></textarea>
+            <textarea #words rows="3" placeholder="Add a comment" required [(ngModel)]="newComment.content" name="words"></textarea>
           </div>
           <button type="submit" class="ui blue button">Comment</button>
         </form>
